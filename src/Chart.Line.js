@@ -74,11 +74,17 @@
 					this.eachPoints(function(point){
 						point.restore(['fillColor', 'strokeColor']);
 					});
-					helpers.each(activePoints, function(activePoint){
+					// Use only first point for tooltip
+					// May not work correctly with multiple datasets
+					var activePointsReduced = [];
+					if (activePoints.length > 0) {
+						activePointsReduced = [activePoints[0]];
+					}
+					helpers.each(activePointsReduced, function(activePoint){
 						activePoint.fillColor = activePoint.highlightFill;
 						activePoint.strokeColor = activePoint.highlightStroke;
 					});
-					this.showTooltip(activePoints);
+					this.showTooltip(activePointsReduced);
 				});
 			}
 
